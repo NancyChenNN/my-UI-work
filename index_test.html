@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>ÆÙ²¼Á÷</title>
+    <title>UI</title>
     <style>
         * {
             margin: 0;
@@ -120,61 +120,61 @@
 </body>
 <script>
     var items = document.getElementsByClassName('item');
-    //¶¨Òå¼äÏ¶10ÏñËØ
+    //å®šä¹‰é—´éš™10åƒç´ 
     var gap = 10;
-    //½øÒ³ÃæÖ´ĞĞº¯Êı
+    //è¿›é¡µé¢æ‰§è¡Œå‡½æ•°
     window.onload = function () {
         waterFall();
     }
 
     function waterFall() {
-        //Ê×ÏÈÈ·¶¨ÁĞÊı = Ò³ÃæµÄ¿í¶È / Í¼Æ¬µÄ¿í¶È
+        //é¦–å…ˆç¡®å®šåˆ—æ•° = é¡µé¢çš„å®½åº¦ / å›¾ç‰‡çš„å®½åº¦
         var pageWidth = getClient().width;
         var itemWidth = items[0].offsetWidth;
         var columns = parseInt(pageWidth / (itemWidth + gap));
-        var arr = [];//¶¨ÒåÒ»¸öÊı×é£¬ÓÃÀ´´æ´¢ÔªËØµÄ¸ß¶È
+        var arr = [];//å®šä¹‰ä¸€ä¸ªæ•°ç»„ï¼Œç”¨æ¥å­˜å‚¨å…ƒç´ çš„é«˜åº¦
         for(var i = 0;i < items.length; i++){
             if(i < columns) {
-                //Âú×ãÕâ¸öÌõ¼şÔòËµÃ÷ÔÚµÚÒ»ĞĞ£¬ÎÄÕÂÀïÃæÓĞÌáµ½
+                //æ»¡è¶³è¿™ä¸ªæ¡ä»¶åˆ™è¯´æ˜åœ¨ç¬¬ä¸€è¡Œï¼Œæ–‡ç« é‡Œé¢æœ‰æåˆ°
                 items[i].style.top = 0;
                 items[i].style.left = (itemWidth + gap) * i + 'px';
                 arr.push(items[i].offsetHeight);
             }else {
-                //ÆäËûĞĞ£¬ÏÈÕÒ³ö×îĞ¡¸ß¶ÈÁĞ£¬ºÍË÷Òı
-                //¼ÙÉè×îĞ¡¸ß¶ÈÊÇµÚÒ»¸öÔªËØ
+                //å…¶ä»–è¡Œï¼Œå…ˆæ‰¾å‡ºæœ€å°é«˜åº¦åˆ—ï¼Œå’Œç´¢å¼•
+                //å‡è®¾æœ€å°é«˜åº¦æ˜¯ç¬¬ä¸€ä¸ªå…ƒç´ 
                 var minHeight = arr[0];
                 var index = 0;
-                for(var j = 0; j < arr.length; j++){//ÕÒ³ö×îĞ¡¸ß¶È
+                for(var j = 0; j < arr.length; j++){//æ‰¾å‡ºæœ€å°é«˜åº¦
                    if(minHeight > arr[j]){
                        minHeight = arr[j];
                        index = j;
                    } 
                 }
-                //ÉèÖÃÏÂÒ»ĞĞµÄµÚÒ»¸öºĞ×ÓµÄÎ»ÖÃ
-                //topÖµ¾ÍÊÇ×îĞ¡ÁĞµÄ¸ß¶È+gap
+                //è®¾ç½®ä¸‹ä¸€è¡Œçš„ç¬¬ä¸€ä¸ªç›’å­çš„ä½ç½®
+                //topå€¼å°±æ˜¯æœ€å°åˆ—çš„é«˜åº¦+gap
                 items[i].style.top = arr[index] + gap + 'px';
                 items[i].style.left = items[index].offsetLeft + 'px';
 
-                //ĞŞ¸Ä×îĞ¡ÁĞµÄ¸ß¶È
-                //×îĞ¡ÁĞµÄ¸ß¶È = µ±Ç°×Ô¼ºµÄ¸ß¶È + Æ´½Ó¹ıÀ´µÄ¸ß¶È + ¼äÏ¶µÄ¸ß¶È
+                //ä¿®æ”¹æœ€å°åˆ—çš„é«˜åº¦
+                //æœ€å°åˆ—çš„é«˜åº¦ = å½“å‰è‡ªå·±çš„é«˜åº¦ + æ‹¼æ¥è¿‡æ¥çš„é«˜åº¦ + é—´éš™çš„é«˜åº¦
                 arr[index] = arr[index] + items[i].offsetHeight + gap;
             }
         }
     }
 
-    //µ±Ò³Ãæ³ß´ç·¢Éú±ä»¯Ê±£¬´¥·¢º¯Êı£¬ÊµÏÖÏìÓ¦Ê½
+    //å½“é¡µé¢å°ºå¯¸å‘ç”Ÿå˜åŒ–æ—¶ï¼Œè§¦å‘å‡½æ•°ï¼Œå®ç°å“åº”å¼
     window.onresize = function () {
         waterFall();
     }
 
-    // clientWidth ´¦Àí¼æÈİĞÔ
+    // clientWidth å¤„ç†å…¼å®¹æ€§
     function getClient() {
         return {
             width: window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth,
             height: window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight
         }
     }
-    // scrollTop¼æÈİĞÔ´¦Àí
+    // scrollTopå…¼å®¹æ€§å¤„ç†
     function getScrollTop() {
         return window.pageYOffset || document.documentElement.scrollTop;
     }
